@@ -1,0 +1,29 @@
+<div class="container">
+  <!-- Chosen Email -->
+  <div *ngIf="selectedEmail" class="selected-email">
+    Выбранный email: {{ selectedEmail }}
+  </div>
+
+  <h2>Список пользователей</h2>
+
+  <!-- Filters -->
+  <div class="filters">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Поиск по имени">
+    <select [(ngModel)]="filterType">
+      <option value="all">Все</option>
+      <option value="active">Только активные</option>
+      <option value="inactive">Только неактивные</option>
+    </select>
+  </div>
+
+  <!-- User's list -->
+  <ul>
+    <li *ngFor="let user of filteredUsers" (click)="showEmail(user.email)">
+      <span class="name">{{ user.name }}</span>
+      <span class="email">({{ user.email }})</span>
+      <span class="status" [class.active]="user.active" [class.inactive]="!user.active">
+        {{ user.active ? 'Активен' : 'Неактивен' }}
+      </span>
+    </li>
+  </ul>
+</div>
